@@ -160,7 +160,7 @@ namespace Wacki.IsoRPG
                 Kill();
         }
 
-        protected virtual void Kill()
+        public virtual void Kill()
         {
             Debug.Log("I am kill");     
             // play death sound       

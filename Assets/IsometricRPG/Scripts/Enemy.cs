@@ -48,7 +48,7 @@ namespace Wacki.IsoRPG
 
         public LayerMask layerMask;
 
-        protected override void Kill()
+        public override void Kill()
         {
             base.Kill();
             //Destroy(gameObject);

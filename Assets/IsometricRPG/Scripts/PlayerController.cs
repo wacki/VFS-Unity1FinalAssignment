@@ -179,7 +179,7 @@ namespace Wacki.IsoRPG
         }
 
         // Handle custom death stuff
-        protected override void Kill()
+        public override void Kill()
         {
             base.Kill();
             _animator.SetTrigger("die");
