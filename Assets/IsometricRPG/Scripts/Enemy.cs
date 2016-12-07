@@ -26,6 +26,8 @@ namespace Wacki.IsoRPG
         // current timer telling us how lomg we havent spotted the player
         private float _blindChaseTimer;
 
+        public ParticleSystem bloodEffect;
+
         // enemies get a special audio clip when they detect the player
         public AudioClip[] playerDetectClips;
 
@@ -157,6 +159,13 @@ namespace Wacki.IsoRPG
                     _agent.SetDestination(patrolPath.currentWaypoint.transform.position);
                 }
             }
+        }
+
+        protected override void TakeDamage(int amount)
+        {
+            base.TakeDamage(amount);
+
+            bloodEffect.Play();
         }
 
         // Gracefully remove enemies that were killed
