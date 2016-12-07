@@ -11,6 +11,9 @@ namespace Wacki.IsoRPG
             var unit = other.GetComponent<BaseUnit>();
             if(unit != null)
             {
+                if (unit.IsDead())
+                    return;
+
                 unit.Kill();
             }
         }

@@ -125,6 +125,8 @@ namespace Wacki.IsoRPG
                     vel = _rollDir * rollVelocity;
                 _rb.velocity = vel;
 
+                transform.forward = _rollDir;
+
                 _rollTimer -= Time.deltaTime;
                 if (_rollTimer < 0.0f)
                 {
@@ -139,7 +141,7 @@ namespace Wacki.IsoRPG
             }
 
             if (Input.GetButtonDown("Dodge"))
-                Roll();
+                Roll(viewSpaceInput);
 
         }
 
@@ -163,10 +165,13 @@ namespace Wacki.IsoRPG
         }
 
         // :(
-        private void Roll()
+        private void Roll(Vector3 dir)
         {
-            if (state == State.Roll && energy < rollEnergyCost)
+            if (state == State.Roll || energy < rollEnergyCost)
                 return;
+
+            if (dir.sqrMagnitude < Mathf.Epsilon)
+                dir = transform.forward;
 
             SpendEnergy(rollEnergyCost);
 
@@ -175,7 +180,7 @@ namespace Wacki.IsoRPG
             Debug.Log("ROLLING");
             _rollTimer = rollDuration;
             _state = State.Roll;
-            _rollDir = transform.forward;
+            _rollDir = dir;
         }
 
         // Handle custom death stuff
